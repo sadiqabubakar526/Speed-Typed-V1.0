@@ -1,0 +1,274 @@
+<!--
+   Name: Speed Typer
+   Date of Creation: 17/08/2020
+   Author: RAMADAN
+   Type: Game
+   Version: 1.0
+   -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="Author" content="SURAJ ABUBAKAR" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Speed Typer</title>
+
+</head>
+
+<body>
+      <div class="loader" id="load">
+    <div>Loading....</div>
+  </div>
+  <div id="main" class="main">
+       <div class="menu-area">
+      <div class="container">
+        <center>
+          <h2>Speed Typer</h2>
+          <button onclick="startGame()" class="menu-btn">Start Game</button>
+         <button onclick="startLevel()" class="menu-btn">Level</button> 
+          <button onclick="startAbout()" class="menu-btn">About</button>
+          <button onclick="this.parentElement.style.display='none'" class="menu-btn">
+            Exit
+          </button>
+          <div class="footer"><span> &copy;2020</span><span>SURAJ ABUBAKAR</span></span> </div>
+        </center>
+      </div>
+    </div>
+
+    <div class="game-area">
+      <div class="container">
+        <center>
+          <h2>Speed Typer</h2>
+          <div style="text-align: left;" class="time-left col">
+            Time: <span id="time">10s</span>
+          </div>
+          <div style="text-align: right;" class="score-area col">
+            Score: <span id="score">0</span>
+          </div>
+          <small>Type the following word:</small>
+          <h1 id="word">SURAJ ABUBAKAR</h1>
+          <input type="text" id="input" autocomplete="off" placeholder="Type the word here..." />
+          <button onclick="resetButton()" class="back col">Restart</button>
+          <button onclick="levelTwo()" class="back col2">Next Level</button>
+          </center>
+      </div>
+      
+    </div>
+
+    <div class="level-area">
+        <div class="container">
+          <center>
+          <h2>👩‍💻 Select Level 👨‍💻</h2>
+          <button onclick="levelOne()" class="menu-btn">Level One</button>
+          <button onclick="levelTwo()" class="menu-btn">Level Two</button>
+          <button class="menu-btn">Level Three</button>
+          <button onclick="backButton()" class="back">Back</button>
+        </center>
+        </div>
+      </div> 
+
+    <div class="about-area">
+      <div class="container">
+        <center>
+          <h2 style="font-size: 20px;">About Game</h2>
+          <p>
+            <h3>Name: Speed Typer</h3>
+            <h3>Version: 1.0</h3>
+            <h3>Creator: Ramadan</h3>
+          </p>
+          <h3 style="font-size: 20px;">Instruction</h3><hr width="200px">
+          <p class="ins">
+             Simply type the word on the input box to score. You'll get 15 seconds and for each right answer will get 3+ seconds and 5+ points. <br>Let's see your typing skill.
+          </p>
+          <button onclick="backButton()" class="back">Back</button>
+        </center>
+      </div>
+    </div>
+    <div class="game-over">
+      <div class="container">
+        <center>
+          <h2>‍ Game Over</h2>
+          <h3 class="final-score">&#128546;<br> Your Score <span id="finalscore"></span></h3>
+          <button onclick="tryAgain()" class="back">Try Again</button>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div id="toast"></div>
+     <footer>
+              By SURAJ ABUBAKAR ✊
+        </footer>
+  <script>
+      //Problem while loading so had to put them all into script tag//
+
+/*
+var mainMenu = document.querySelector(".menu-area");
+var gameArea = document.querySelector(".game-area");
+var levelArea = document.querySelector(".level-area");
+var aboutArea = document.querySelector(".about-area");
+var inputArea = document.querySelector("#input");
+var setWord = document.querySelector("#word");
+var setScore = document.querySelector("#score");
+var setTime = document.querySelector("#time");
+var gameover = document.querySelector(".game-over");
+var finalScore = document.querySelector("#finalscore");
+var toast = document.querySelector("#toast");
+(function () {
+  var myVar= setTimeout(showPage, 5000);
+function showPage(){
+    document.getElementById("load").style.display = "none";
+    document.getElementById("main").style.visibility = "visible";
+}
+}) ();
+function startGame() {
+  mainMenu.style.display = "none";
+  gameArea.style.display = "block";
+  inputArea.focus();
+  getWord();
+  timeInterval = setInterval(timeUpdate, 1000);
+  toast.className = "show";
+  toast.innerHTML = "Level One";
+  setTimeout(function () {
+    toast.className = toast.className.replace("show", "");
+  }, 3000);
+}
+function startLevel() {
+  mainMenu.style.display = "none";
+  levelArea.style.display = "block";
+}
+function startAbout() {
+  mainMenu.style.display = "none";
+  aboutArea.style.display = "block";
+}
+function backButton() {
+  mainMenu.style.display = "block";
+  if (aboutArea.style.display == "block" || gameArea.style.display == "block") {
+    mainMenu.style.display = "block";
+    gameArea.style.display = "none";
+    aboutArea.style.display = "none";
+  }
+}
+function resetButton() {
+  time = 10;
+  getWord();
+  score = 0;
+  setScore.innerHTML = score;
+  inputArea.value = "";
+  inputArea.focus();
+  toast.className = "show";
+  toast.innerHTML = "Game Restarted";
+  setTimeout(function () {
+    toast.className = toast.className.replace("show", "");
+  }, 3000);
+}
+function tryAgain() {
+  gameover.style.display = "none";
+  gameArea.style.display = "block";
+  startGame();
+  time = 10;
+  score = 0;
+  setScore.innerHTML = score;
+  inputArea.value = "";
+}
+var words = [
+  "bible",
+  "learn",
+  "soft",
+  "knock",
+  "big",
+  "java",
+  "python",
+  "hook",
+  "corona",
+  "vaccine",
+  "hand",
+  "wash",
+  "safe",
+  "home",
+  "date",
+  "who",
+  "none",
+  "not",
+  "you",
+  "love",
+  "hate",
+  "normal",
+  "really",
+  "kiss",
+  "nokia",
+  "Eliza",
+  "face",
+  "google",
+  "twitter",
+  "tiger",
+  "lion",
+  "secret",
+];
+
+var randomWord;
+var score = 0;
+var time = 10;
+
+function getRandomWord() {
+  return words[Math.floor(Math.random() * words.length)];
+}
+function getWord() {
+  randomWord = getRandomWord();
+  setWord.innerHTML = randomWord;
+}
+function scoreUpdate() {
+  score += 5;
+  setScore.innerHTML = score;
+}
+function timeUpdate() {
+  time--;
+  setTime.innerHTML = time + "s";
+
+  if (time === 0) {
+    clearInterval(timeInterval);
+    gameOver();
+  }
+}
+var timeInterval;
+function gameOver() {
+  gameover.style.display = "block";
+  gameArea.style.display = "none";
+  finalScore.innerHTML = `${score}`;
+}
+
+inputArea.addEventListener("input", (e) => {
+  var textInsert = e.target.value;
+  if (textInsert === randomWord) {
+    getWord();
+    scoreUpdate();
+    e.target.value = "";
+
+    // if (score <= 10 || score > 50  ) {
+    //   time += 1;
+    // } else {
+    //   time += 5;
+    // }
+    time += 3;
+    timeUpdate();
+  }
+});;
+  function levelOne() {
+   startGame();
+   levelArea.style.display = "none";
+ }
+function levelTwo() {
+  toast.className = "show";
+  toast.innerHTML = "No level right now";
+  setTimeout(function () {
+    toast.className = toast.className.replace("show", "");
+  }, 3000);
+}
+*/
+      
+  </script>
+</body>
+
+</html>
